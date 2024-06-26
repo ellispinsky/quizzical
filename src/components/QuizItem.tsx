@@ -1,6 +1,14 @@
+interface QuizItemProps {
+    question: string;
+    answers: string[];
+  }
 
-export default function QuizItem() {
+function QuizItem({question , answers}) 
+{
   return (
-    <div>QuizItem</div>
+    <><h2>{question}</h2><p>{answers}</p></>
+
   )
 }
+ 
+export default QuizItem
