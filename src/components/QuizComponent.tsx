@@ -47,8 +47,9 @@ function QuizComponent() {
     {quizData.length > 0 ? (
     
       quizData.map((question, index) => (
-        <QuizItem key={index} question={question.question} answers={question.allAnswers} />
-    
+  
+        <QuizItem key={index} question={question.question} answers={question.allAnswers} correctAnswer={question.correct_answer}/>
+      
       ))
     ) : (
       <p>Loading quiz data...</p>  // Display a loading message or spinner
