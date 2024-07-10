@@ -1,6 +1,7 @@
 import QuizItem from "./QuizItem";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import he from 'he'
 
 interface Question {
   type: string;
@@ -14,12 +15,17 @@ interface Question {
 
 function QuizComponent() {
     const [quizData, setQuizData] = useState<Question[]>([]); // Define the state with a specific type
-    function formatQuestions(data: Question[]): Question[] {
+    // helper function
+    function formatQuestions(data: Question[]): Question[] 
+    {
     return data.map((item: Question) => {
-      const allAnswers = [item.correct_answer, ...item.incorrect_answers];
+      const allAnswers = [...item.incorrect_answers];
+      const randomIndex = Math.floor(Math.random() * (allAnswers.length + 1));
+      allAnswers.splice(randomIndex, 0 , item.correct_answer)
       return {
         ...item,
-        allAnswers: allAnswers,
+        question: he.decode(item.question) , //decode question title
+        allAnswers: allAnswers.map(answer => he.decode(answer))
       };
     });
   }
