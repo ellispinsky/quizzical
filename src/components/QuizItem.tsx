@@ -18,13 +18,13 @@ function QuizItem({ question, answers , correctAnswer } : QuizItemProps) {
 
   return (
     <>
-      <h2 className="text-2xl font-bold text-gray-800">{question}</h2>
+      <h2 className="text-2xl font-bold m-1 text-gray-700">{question}</h2>
       <ul className="list-item pl-5 space-y-2">
         {answers.map((answer, index) => (
           
           <li 
           key={index} 
-          className={`text-gray-600 border-2 cursor-pointer ${selectedAnswer === answer ? (isCorrect ? 'bg-green-200 border-green-200' : 'bg-red-200 border-red-200') : 'border-red-200'}`}
+          className={`inline-block m-1 text-gray-600 px-4 py-1 border-2 rounded-xl cursor-pointer ${selectedAnswer === answer ? (isCorrect ? 'bg-green-200 border-green-200' : 'bg-red-200 border-red-200') : 'border-gray-200'}`}
           onClick={() => handleClick(answer)}>{answer}
           </li>
         ))}
