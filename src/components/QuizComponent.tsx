@@ -1,6 +1,7 @@
 import QuizItem from "./QuizItem";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+
 import he from 'he'
 
 interface Question {
@@ -54,7 +55,7 @@ function QuizComponent() {
     
       quizData.map((question, index) => (
   
-        <QuizItem key={index} question={question.question} answers={question.allAnswers} correctAnswer={question.correct_answer}/>
+        <QuizItem key={index} question={question.question} answers={question.allAnswers ?? []} correctAnswer={question.correct_answer}/>
       
       ))
     ) : (

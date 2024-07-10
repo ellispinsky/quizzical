@@ -6,7 +6,7 @@ interface QuizItemProps {
   correctAnswer: string;
 }
 
-function QuizItem({ question, answers , correctAnswer }) {
+function QuizItem({ question, answers , correctAnswer } : QuizItemProps) {
   const [selectedAnswer , setSelectedAnswer]  = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
   
