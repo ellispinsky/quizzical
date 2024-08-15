@@ -20,6 +20,8 @@ function QuizComponent() {
     [key: string]: string;
   }>({});
   const [result, setResult] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
   // helper function
   function formatQuestions(data: Question[]): Question[] {
     return data.map((item: Question) => {
@@ -42,7 +44,9 @@ function QuizComponent() {
     const correctAnswers = quizData.filter(
       (q) => selectedAnswers[q.question] === q.correct_answer
     ).length;
+    
     setResult(`You got ${correctAnswers} out of ${quizData.length} correct!`);
+    setIsSubmitted(true)
   }
   useEffect(() => {
     const fetchData = async () => {
@@ -73,6 +77,8 @@ function QuizComponent() {
               answers={question.allAnswers ?? []}
               correctAnswer={question.correct_answer}
               onAnswerSelect={handleAnswerSelect}
+              isSubmitted={isSubmitted}
+              selectedAnswer={selectedAnswers[question.question] || null}
             />
           ))}
           <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={handleSubmit}>
