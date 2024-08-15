@@ -34,21 +34,22 @@ function QuizComponent() {
     });
   }
   function handleAnswerSelect(question: string, answer: string) {
-    setSelectedAnswers(prev => ({...prev, [question]: answer}))
+    setSelectedAnswers((prev) => ({ ...prev, [question]: answer }));
     // console.log("the question:", question, "the answer:", answer)
-    console.log(selectedAnswers)
+    console.log(selectedAnswers);
   }
-  function handleSubmit()
-  {
-    const correctAnswers = quizData.filter(q =>selectedAnswers[q.question] === q.correct_answer).length
+  function handleSubmit() {
+    const correctAnswers = quizData.filter(
+      (q) => selectedAnswers[q.question] === q.correct_answer
+    ).length;
     setResult(`You got ${correctAnswers} out of ${quizData.length} correct!`);
   }
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data...");
+      
       try {
         const response = await axios.get(
-          "https://opentdb.com/api.php?amount=10"
+          "https://opentdb.com/api.php?amount=5"
         );
         const results: Question[] = response.data.results;
         const formattedQuestions = formatQuestions(results);
@@ -62,27 +63,27 @@ function QuizComponent() {
   }, []);
 
   return (
-    <>
-      {quizData.length > 0 ? 
-      (
-        
-        quizData.map((question, index) => (
-          <QuizItem
-            key={index}
-            question={question.question}
-            answers={question.allAnswers ?? []}
-            correctAnswer={question.correct_answer}
-            onAnswerSelect={handleAnswerSelect}
-          />
-        )
-      )
-      
-        
-        
+    <div>
+      {quizData.length > 0 ? (
+        <div>
+          {quizData.map((question, index) => (
+            <QuizItem
+              key={index}
+              question={question.question}
+              answers={question.allAnswers ?? []}
+              correctAnswer={question.correct_answer}
+              onAnswerSelect={handleAnswerSelect}
+            />
+          ))}
+          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={handleSubmit}>
+            Submit
+          </button>
+          {result && <p className="mt-4 text-xl">{result}</p>}
+        </div>
       ) : (
         <p>Loading quiz data...</p> // Display a loading message or spinner
       )}
-    </>
+    </div>
   );
 }
 export default QuizComponent;
