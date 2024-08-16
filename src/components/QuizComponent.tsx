@@ -88,8 +88,8 @@ function QuizComponent() {
           ))
           
           }
-          <button style={{margin:'20px'}} onClick={handleSubmit}>
-            Submit
+          <button style={{margin:'25px' , backgroundColor: '#4D5B9E', color: 'white'}} onClick={handleSubmit}>
+            Check Answers
           </button>
           {result && <p className="mt-4 text-xl">{result}</p>}
         </div>
