@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import he from "he";
+import "../App.css";
 
 interface Question {
   type: string;
@@ -41,9 +42,11 @@ function QuizComponent() {
     console.log(selectedAnswers);
   }
   function handleSubmit() {
+    
     const correctAnswers = quizData.filter(
       (q) => selectedAnswers[q.question] === q.correct_answer
     ).length;
+    
     
     setResult(`You got ${correctAnswers} out of ${quizData.length} correct!`);
     setIsSubmitted(true)
@@ -70,7 +73,9 @@ function QuizComponent() {
     <div>
       {quizData.length > 0 ? (
         <div>
+          
           {quizData.map((question, index) => (
+            
             <QuizItem
               key={index}
               question={question.question}
@@ -80,8 +85,10 @@ function QuizComponent() {
               isSubmitted={isSubmitted}
               selectedAnswer={selectedAnswers[question.question] || null}
             />
-          ))}
-          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={handleSubmit}>
+          ))
+          
+          }
+          <button style={{margin:'20px'}} onClick={handleSubmit}>
             Submit
           </button>
           {result && <p className="mt-4 text-xl">{result}</p>}
