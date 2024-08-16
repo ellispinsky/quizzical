@@ -48,7 +48,7 @@ function QuizComponent() {
     ).length;
     
     
-    setResult(`You got ${correctAnswers} out of ${quizData.length} correct!`);
+    setResult(`You scored ${correctAnswers} out of ${quizData.length} correct!`);
     setIsSubmitted(true)
   }
   useEffect(() => {
